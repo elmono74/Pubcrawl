@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Annual Metra Pub Crawl · August 15, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #12151b;
+    --panel: #1b2028;
+    --panel-line: #2a303b;
+    --orange: #e8722e;
+    --amber: #d9a441;
+    --rail-blue: #3a5a6b;
+    --paper: #f2efe9;
+    --paper-dim: #b9b6ae;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,h2,h3, .display{
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+
+  .mono{
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.72rem;
+    color: var(--orange);
+    font-weight: 600;
+  }
+
+  a{ color: var(--amber); }
+
+  .wrap{
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero{
+    position: relative;
+    padding: 96px 0 72px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  .hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(232,114,46,0.06) 0px, rgba(232,114,46,0.06) 1px, transparent 1px, transparent 64px),
+      repeating-linear-gradient(90deg, rgba(232,114,46,0.06) 0px, rgba(232,114,46,0.06) 1px, transparent 1px, transparent 64px);
+    mask-image: radial-gradient(ellipse at 30% 20%, black 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner{ position: relative; text-align: center; }
+
+  .route-badge{
+    display:inline-flex;
+    align-items:center;
+    gap: 10px;
+    padding: 6px 14px;
+    border: 1px solid var(--orange);
+    border-radius: 999px;
+    margin: 0 auto 28px;
+  }
+
+  .route-badge .dot{
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--orange);
+    box-shadow: 0 0 0 3px rgba(232,114,46,0.25);
+  }
+
+  h1.title{
+    font-size: clamp(2.6rem, 7vw, 4.6rem);
+    line-height: 0.98;
+    color: var(--paper);
+  }
+
+  h1.title .accent{ color: var(--orange); }
+
+  .subhead{
+    max-width: 480px;
+    margin: 22px auto 0;
+    color: var(--paper-dim);
+    font-size: 1.05rem;
+  }
+
+  .hero-meta{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px dashed var(--panel-line);
+  }
+
+  .hero-meta div{ min-width: 130px; text-align: left; }
+
+  .hero-meta .label{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    margin-bottom: 4px;
+  }
+
+  .hero-meta .value{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--amber);
+  }
+
+  /* ---------- SECTION HEADERS ---------- */
+
+  section{ padding: 64px 0; }
+
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .section-head h2{
+    font-size: clamp(1.6rem, 4vw, 2.1rem);
+  }
+
+  /* ---------- DEPARTURE BOARD ---------- */
+
+  .board{
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .board-row{
+    display: grid;
+    grid-template-columns: 88px 1fr 100px;
+    gap: 12px;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid var(--panel-line);
+  }
+
+  .board-row:last-child{ border-bottom: none; }
+
+  .board-row.transit{
+    background: rgba(58,90,107,0.18);
+  }
+
+  .board-time{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+  }
+
+  .board-station{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+
+  .board-name{
+    font-size: 1.02rem;
+    font-weight: 500;
+    color: var(--paper);
+  }
+
+  .board-sub{
+    font-size: 0.85rem;
+    color: var(--paper-dim);
+    margin-top: 2px;
+  }
+
+  .board-status{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: right;
+    color: var(--amber);
+  }
+
+  .flap{
+    display: inline-block;
+    overflow: hidden;
+    height: 1.3em;
+    vertical-align: bottom;
+  }
+
+  .flap span{
+    display: inline-block;
+  }
+
+  /* ---------- ROUTE STRIP ---------- */
+
+  .route-strip{
+    display:flex;
+    align-items:center;
+    overflow-x: auto;
+    padding: 32px 4px 12px;
+    gap: 0;
+  }
+
+  .stop-node{
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    min-width: 92px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .stop-node .ring{
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 3px solid var(--orange);
+    z-index: 2;
+  }
+
+  .stop-node .stop-label{
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--paper-dim);
+    text-align: center;
+  }
+
+  .connector{
+    flex: 1;
+    height: 3px;
+    background: repeating-linear-gradient(90deg, var(--panel-line) 0, var(--panel-line) 6px, transparent 6px, transparent 12px);
+    min-width: 32px;
+    position: relative;
+    top: -18px;
+  }
+
+  .connector.boat{
+    background: repeating-linear-gradient(90deg, var(--rail-blue) 0, var(--rail-blue) 6px, transparent 6px, transparent 12px);
+  }
+
+  /* ---------- GALLERY CAROUSEL ---------- */
+
+  .carousel{
+    position: relative;
+  }
+
+  .carousel-track{
+    display:flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+  }
+
+  .carousel-track::-webkit-scrollbar{ display:none; }
+
+  .carousel-slide{
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--panel-line);
+  }
+
+  .carousel-slide img{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (min-width: 720px){
+    .carousel-slide{ flex-basis: 68%; }
+  }
+
+  .carousel-nav{
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 18px;
+  }
+
+  .carousel-btn{
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--orange);
+    background: transparent;
+    color: var(--orange);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1rem;
+    cursor: pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .carousel-btn:hover{ background: rgba(232,114,46,0.12); }
+
+  .carousel-dots{
+    display:flex;
+    gap: 8px;
+  }
+
+  .carousel-dots button{
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: var(--panel-line);
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .carousel-dots button.active{
+    background: var(--orange);
+  }
+
+  /* ---------- INVITE SHOWCASE ---------- */
+
+  .invite-showcase{
+    display:flex;
+    justify-content:center;
+  }
+
+  .invite-card{
+    max-width: 380px;
+    width: 100%;
+    border: 1px solid var(--panel-line);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+  }
+
+  .invite-card img{
+    width: 100%;
+    display: block;
+  }
+
+  .invite-caption{
+    text-align: center;
+    max-width: 420px;
+    margin: 18px auto 0;
+    color: var(--paper-dim);
+    font-size: 0.9rem;
+  }
+
+  /* ---------- ABOUT / PHOTO ---------- */
+
+  .about{
+    position: relative;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--panel-line);
+  }
+
+  .about img{
+    width: 100%;
+    display:block;
+    filter: saturate(1.05) contrast(1.03);
+  }
+
+  .about-overlay{
+    position:absolute;
+    inset:0;
+    background: linear-gradient(0deg, rgba(18,21,27,0.95) 0%, rgba(18,21,27,0.55) 45%, rgba(18,21,27,0.15) 75%);
+    display:flex;
+    align-items:flex-end;
+    padding: 28px;
+  }
+
+  .about-overlay p{
+    max-width: 460px;
+    color: var(--paper);
+    font-size: 0.98rem;
+  }
+
+  .about-overlay strong{ color: var(--amber); }
+
+  /* ---------- INFO CARDS ---------- */
+
+  .cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .card{
+    background: var(--panel);
+    border: 1px solid var(--panel-line);
+    border-radius: 4px;
+    padding: 22px;
+  }
+
+  .card .num{
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--orange);
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+
+  .card h3{
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .card p{
+    font-size: 0.9rem;
+    color: var(--paper-dim);
+    margin: 0;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer{
+    border-top: 1px solid var(--panel-line);
+    padding: 36px 0 60px;
+  }
+
+  .footer-row{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-row .mono{
+    font-size: 0.78rem;
+    color: var(--paper-dim);
+  }
+
+  .hairline{
+    height: 3px;
+    width: 64px;
+    background: var(--orange);
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 640px){
+    .board-row{ grid-template-columns: 72px 1fr; }
+    .board-status{ display:none; }
+    .cards{ grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="wrap hero-inner">
+      <div class="route-badge">
+        <span class="dot"></span>
+        <span class="mono" style="font-size:0.75rem; letter-spacing:0.1em; color:var(--paper-dim);">BNSF LINE &middot; AUGUST 15, 2026</span>
+      </div>
+
+      <h1 class="title">Second Annual<br><span class="accent">Metra Pub Crawl</span></h1>
+
+      <p class="subhead">Noon to nightfall. About 45 to 50 minutes at each pub, then the next train into the city, dim sum, and karaoke to close it out.</p>
+
+      <div class="hero-meta">
+        <div>
+          <div class="label">Departs</div>
+          <div class="value">12:00 PM</div>
+        </div>
+        <div>
+          <div class="label">From</div>
+          <div class="value">Downers Grove</div>
+        </div>
+        <div>
+          <div class="label">Ends</div>
+          <div class="value">Sakura Karaoke</div>
+        </div>
+        <div style="text-align: center;">
+          <div class="label">Hosted by</div>
+          <div class="value" style="color: var(--paper); font-size: 0.95rem;">Angel Cuevas and Nicole Pieranunzi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="board">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Departure Board</div>
+          <h2>Pub Crawl Schedule</h2>
+        </div>
+        <div class="mono" style="font-size:0.8rem; color:var(--paper-dim);">about 45 to 50 min per stop</div>
+      </div>
+
+      <p class="mono" style="font-size:0.8rem; color:var(--amber); margin-top:-16px; margin-bottom:24px;">Final times are pending Metra's switch back to its non-summer schedule, so treat these as planning estimates for now.</p>
+
+      <div class="board" id="board-list">
+
+        <div class="board-row">
+          <div class="board-time flap-time" data-final="NOON">NOON</div>
+          <div>
+            <div class="board-station">Downers Grove &middot; Main St</div>
+            <div class="board-name">Orange &amp; Brew</div>
+            <div class="board-sub">Craft beer bottle shop and tap room</div>
+          </div>
+          <div class="board-status">Boarding</div>
+        </div>
+
+        <div class="board-row">
+          <div class="board-time flap-time" data-final="1:36P">1:36P</div>
+          <div>
+            <div class="board-station">Clarendon Hills</div>
+            <div class="board-name">Tierra Distilling Co. &amp; Cafe</div>
+            <div class="board-sub">Coffee by day, cocktails by night</div>
+          </div>
+          <div class="board-status">On Time</div>
+        </div>
+
+        <div class="board-row">
+          <div class="board-time flap-time" data-final="2:39P">2:39P</div>
+          <div>
+            <div class="board-station">Hinsdale</div>
+            <div class="board-name">Fuller House</div>
+            <div class="board-sub">Rustic tavern, downtown Hinsdale</div>
+          </div>
+          <div class="board-status">On Time</div>
+        </div>
+
+        <div class="board-row">
+          <div class="board-time flap-time" data-final="3:45P">3:45P</div>
+          <div>
+            <div class="board-station">La Grange Road</div>
+            <div class="board-name">Barrel House Social</div>
+            <div class="board-sub">Steps from the platform</div>
+          </div>
+          <div class="board-status">On Time</div>
+        </div>
+
+        <div class="board-row transit">
+          <div class="board-time flap-time" data-final="5:20P">5:20P</div>
+          <div>
+            <div class="board-station">Union Station &rarr; Transfer</div>
+            <div class="board-name">Chicago Water Taxi</div>
+            <div class="board-sub">Main Branch route to Chinatown</div>
+          </div>
+          <div class="board-status">Transfer</div>
+        </div>
+
+        <div class="board-row">
+          <div class="board-time flap-time" data-final="EVE">EVE</div>
+          <div>
+            <div class="board-station">Chinatown &middot; Ping Tom Park</div>
+            <div class="board-name">MingHin Cuisine</div>
+            <div class="board-sub">Dim sum, then on to the last stop</div>
+          </div>
+          <div class="board-status">Arrived</div>
+        </div>
+
+        <div class="board-row">
+          <div class="board-time flap-time" data-final="LATE">LATE</div>
+          <div>
+            <div class="board-station">Chinatown &middot; Cermak Rd</div>
+            <div class="board-name">Sakura Karaoke Bar</div>
+            <div class="board-sub">Private rooms, open until 3 AM</div>
+          </div>
+          <div class="board-status">Final Stop</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="route">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">The Route</div>
+          <h2>One Line, Six Stops</h2>
+        </div>
+      </div>
+
+      <div class="route-strip">
+        <div class="stop-node">
+          <div class="ring"></div>
+          <div class="stop-label">Downers<br>Grove</div>
+        </div>
+        <div class="connector"></div>
+        <div class="stop-node">
+          <div class="ring"></div>
+          <div class="stop-label">Clarendon<br>Hills</div>
+        </div>
+        <div class="connector"></div>
+        <div class="stop-node">
+          <div class="ring"></div>
+          <div class="stop-label">Hinsdale</div>
+        </div>
+        <div class="connector"></div>
+        <div class="stop-node">
+          <div class="ring"></div>
+          <div class="stop-label">La Grange</div>
+        </div>
+        <div class="connector"></div>
+        <div class="stop-node">
+          <div class="ring"></div>
+          <div class="stop-label">Union<br>Station</div>
+        </div>
+        <div class="connector boat"></div>
+        <div class="stop-node">
+          <div class="ring"></div>
+          <div class="stop-label">Chinatown</div>
+        </div>
+        <div class="connector"></div>
+        <div class="stop-node">
+          <div class="ring"></div>
+          <div class="stop-label">Karaoke</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="invite">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Save The Date</div>
+          <h2>The Official Invite</h2>
+        </div>
+      </div>
+
+      <div class="invite-showcase">
+        <div>
+          <div class="invite-card">
+            <img src="images/invite.jpg" alt="Second Annual Metra Pub Crawl invite card, August 15, 2026">
+          </div>
+          <p class="invite-caption">The same card from Apple Invites. Screenshot it, share it, or use it as your lock screen until the 15th.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Last Year</div>
+          <h2>Why We're Doing It Again</h2>
+        </div>
+      </div>
+      <p style="max-width:560px; color:var(--paper-dim); margin-bottom:28px;">Last year's water taxi ride from Union Station to Chinatown was <strong style="color:var(--amber); font-weight:500;">a huge hit</strong>, so it's back on the schedule, right before dim sum and karaoke.</p>
+
+      <div class="carousel" id="gallery">
+        <div class="carousel-track" id="gallery-track">
+          <div class="carousel-slide"><img src="images/gallery-1.jpg" alt="The group on the platform before boarding"></div>
+          <div class="carousel-slide"><img src="images/gallery-2.jpg" alt="The group waiting trackside as a freight train passes"></div>
+          <div class="carousel-slide"><img src="images/gallery-3.jpg" alt="The group in front of a giant jack o lantern"></div>
+          <div class="carousel-slide"><img src="images/gallery-4.jpg" alt="Karaoke performance with hand-held microphones"></div>
+          <div class="carousel-slide"><img src="images/gallery-5.jpg" alt="The group outside a bar at night"></div>
+          <div class="carousel-slide"><img src="images/gallery-6.jpg" alt="The group riding the train together" style="object-fit: contain; background: #12151b;"></div>
+          <div class="carousel-slide"><img src="images/gallery-7.jpg" alt="The group at a Halloween themed bar"></div>
+        </div>
+        <div class="carousel-nav">
+          <button class="carousel-btn" id="carousel-prev" aria-label="Previous photo">&larr;</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <button class="carousel-btn" id="carousel-next" aria-label="Next photo">&rarr;</button>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="know">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Good To Know</div>
+          <h2>Before You Board</h2>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="num mono">01</div>
+          <h3>Trains run hourly</h3>
+          <p>Saturday BNSF trains keep to the hour, so plan to be back on the platform a few minutes before each departure.</p>
+        </div>
+        <div class="card">
+          <div class="num mono">02</div>
+          <h3>Water taxi is seasonal</h3>
+          <p>The Chinatown route runs through summer. Exact boarding time gets confirmed the week of the event.</p>
+        </div>
+        <div class="card">
+          <div class="num mono">03</div>
+          <h3>Dress for the whole day</h3>
+          <p>Comfortable shoes, layers for the boat, and something you don't mind wearing from noon to midnight.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="hairline"></div>
+      <div class="footer-row">
+        <div class="mono">Second Annual Metra Pub Crawl &middot; metrapubcrawl.org</div>
+        <div class="mono">RSVP details in your Apple Invites invitation</div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var chars = "0123456789APMN:.- ";
+
+  function randChar(){
+    return chars[Math.floor(Math.random()*chars.length)];
+  }
+
+  function flipTo(el, finalText){
+    if(reduceMotion){ el.textContent = finalText; return; }
+    var frames = 10;
+    var count = 0;
+    el.textContent = finalText.split('').map(randChar).join('');
+    var iv = setInterval(function(){
+      count++;
+      if(count >= frames){
+        el.textContent = finalText;
+        clearInterval(iv);
+        return;
+      }
+      var progress = count / frames;
+      el.textContent = finalText.split('').map(function(ch, i){
+        var revealAt = (i+1) / finalText.length;
+        return progress >= revealAt ? ch : randChar();
+      }).join('');
+    }, 55);
+  }
+
+  var targets = document.querySelectorAll('.flap-time');
+  var seen = new WeakSet();
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting && !seen.has(entry.target)){
+        seen.add(entry.target);
+        flipTo(entry.target, entry.target.getAttribute('data-final'));
+      }
+    });
+  }, { threshold: 0.4 });
+
+  targets.forEach(function(el){ observer.observe(el); });
+
+  // Gallery carousel
+  var track = document.getElementById('gallery-track');
+  var dotsWrap = document.getElementById('carousel-dots');
+  var prevBtn = document.getElementById('carousel-prev');
+  var nextBtn = document.getElementById('carousel-next');
+
+  if(track){
+    var slides = track.querySelectorAll('.carousel-slide');
+    slides.forEach(function(_, i){
+      var dot = document.createElement('button');
+      dot.setAttribute('aria-label', 'Go to photo ' + (i+1));
+      dot.addEventListener('click', function(){
+        slides[i].scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+      });
+      dotsWrap.appendChild(dot);
+    });
+    var dots = dotsWrap.querySelectorAll('button');
+
+    function updateDots(){
+      var trackCenter = track.scrollLeft + track.clientWidth / 2;
+      var closest = 0;
+      var closestDist = Infinity;
+      slides.forEach(function(slide, i){
+        var dist = Math.abs((slide.offsetLeft + slide.clientWidth / 2) - trackCenter);
+        if(dist < closestDist){ closestDist = dist; closest = i; }
+      });
+      dots.forEach(function(d, i){ d.classList.toggle('active', i === closest); });
+    }
+
+    track.addEventListener('scroll', function(){
+      window.requestAnimationFrame(updateDots);
+    });
+    updateDots();
+
+    prevBtn.addEventListener('click', function(){
+      track.scrollBy({ left: -track.clientWidth * 0.7, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+    nextBtn.addEventListener('click', function(){
+      track.scrollBy({ left: track.clientWidth * 0.7, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
